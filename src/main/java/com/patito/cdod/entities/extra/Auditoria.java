@@ -8,14 +8,7 @@ import java.util.Date;
 
 @Data
 @MappedSuperclass
-public class Auditoria {
-
-    @Column(name = "fecha_creacion", nullable = false, updatable = false)
-    private Date fechaCreacion;
-
-    @Column(name = "fecha_actualizacion", nullable = false)
-    private Date fechaActualizacion;
-
+public class Auditoria extends RegistroFechas {
     private String ipUsuario;
     private String accion;
 }

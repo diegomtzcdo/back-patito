@@ -2,8 +2,7 @@ package com.patito.cdod.entities;
 
 import com.patito.cdod.entities.extra.Auditoria;
 import com.patito.cdod.entities.extra.EstatusPedido;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,6 +10,9 @@ import java.util.List;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper=true)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Pedido extends Auditoria {
 
     @Id

@@ -1,7 +1,7 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '2.6.11' // Cambiado a una versión compatible con JDK 11
-	id 'io.spring.dependency-management' version '1.0.15.RELEASE' // Cambiado a una versión compatible con Spring Boot 2.6.11
+	id 'org.springframework.boot' version '2.5.7'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
 group = 'com.patito'
@@ -21,18 +21,41 @@ configurations {
 
 repositories {
 	mavenCentral()
+	maven { url 'https://www.javaxt.com/maven' } // Cambiado a HTTPS
+	maven { url 'https://repository.groupdocs.com/repo/' } // Cambiado a HTTPS
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.6.11' // Versión compatible con JDK 11
-	implementation 'org.springframework.boot:spring-boot-starter-web:2.6.11' // Versión compatible con JDK 11
-	implementation group: 'org.springframework.security', name: 'spring-security-config', version: '5.3.0.RELEASE'
-	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.6.RELEASE'
+	implementation 'org.springframework.security:spring-security-jwt:1.1.1.RELEASE'
+	implementation 'org.springframework.security.oauth:spring-security-oauth2:2.5.0.RELEASE'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.14'
 	implementation 'com.microsoft.sqlserver:mssql-jdbc:9.2.1.jre8'
+	implementation 'org.springframework.security:spring-security-config:5.3.0.RELEASE'
+	implementation 'io.jsonwebtoken:jjwt:0.9.0'
+	implementation 'org.hibernate:hibernate-validator:8.0.0.Final'
+	implementation 'javax.xml.bind:jaxb-api:2.3.1'
+	implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.1'
+	implementation 'com.sun.xml.bind:jaxb-impl:2.3.1'
+	implementation 'javax.activation:activation:1.1.1'
+	implementation 'org.thymeleaf:thymeleaf'
+	implementation 'org.thymeleaf:thymeleaf-spring5'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	implementation 'io.springfox:springfox-swagger2:2.9.2'
+	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+	implementation 'javax.mail:mail:1.4.7'
+	implementation 'javaxt:javaxt-core:1.7.8'
+	implementation 'com.groupdocs:groupdocs-metadata:18.2:javadoc'
+	implementation 'commons-io:commons-io:2.11.0'
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.11' // Versión compatible con JDK 11
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
