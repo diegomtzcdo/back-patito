@@ -1,0 +1,41 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.6.11' // Cambiado a una versión compatible con JDK 11
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE' // Cambiado a una versión compatible con Spring Boot 2.6.11
+}
+
+group = 'com.patito'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(11)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.6.11' // Versión compatible con JDK 11
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.6.11' // Versión compatible con JDK 11
+	implementation group: 'org.springframework.security', name: 'spring-security-config', version: '5.3.0.RELEASE'
+	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
+	implementation 'com.microsoft.sqlserver:mssql-jdbc:9.2.1.jre8'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.11' // Versión compatible con JDK 11
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
