@@ -7,10 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -24,9 +21,13 @@ public class Producto extends RegistroFechas {
     private Long id;
 
     @NaturalId
-    private String HAWA;
+    private String hawa;
     private String nombre;
     private Float precio;
     private Integer existencias;
     private Float porcentajeDescuento;
+
+    @ManyToOne
+    @JoinColumn(name = "vendedor_id")
+    private Vendedor vendedor;
 }

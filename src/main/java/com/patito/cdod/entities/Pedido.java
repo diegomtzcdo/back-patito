@@ -23,14 +23,6 @@ public class Pedido extends Auditoria {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    @ManyToOne
-    @JoinColumn(name = "vendedor_id")
-    private Vendedor vendedor;
-
-    @ManyToOne
-    @JoinColumn(name = "tienda_id")
-    private Tienda tienda;
-
     @Enumerated(EnumType.STRING)
     private EstatusPedido estatus;
 
