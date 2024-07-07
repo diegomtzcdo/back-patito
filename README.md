@@ -1,7 +1,7 @@
 # Sistema de Validación de Inventario Patito
 
 [![Build Status](https://travis-ci.org/patito/patito-inventory-system.svg?branch=master)](https://travis-ci.org/patito/patito-inventory-system)
-[![Coverage Status](https://coveralls.io/repos/github/patito/patito-inventory-system/badge.svg?branch=master)](https://coveralls.io/github/patito/patito-inventory-system?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/diegomtzcdo/back-patito/badge.svg?branch=master)](https://coveralls.io/github/diegomtzcdo/back-patito?branch=master)
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 Un sistema integral para validar el inventario de las camionetas antes de realizar pedidos para las tiendas Patito.
