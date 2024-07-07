@@ -9,10 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductoPayload {
-    private String hawa;
-    private String nombre;
-    private Float precio;
-    private Integer existencias;
-    private Float porcentajeDescuento;
+public class PedidoProductoDTO {
+    private ProductoPayload producto;
+    private Integer cantidad;
 }

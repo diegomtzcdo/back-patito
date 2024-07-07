@@ -5,14 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductoPayload {
-    private String hawa;
-    private String nombre;
-    private Float precio;
-    private Integer existencias;
-    private Float porcentajeDescuento;
+public class PedidoPayload {
+    private List<PedidoProductoPayload> productos;
 }

@@ -3,14 +3,15 @@ package com.patito.cdod.entities;
 import com.patito.cdod.entities.extra.Auditoria;
 import com.patito.cdod.entities.extra.EstatusPedido;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Data
-@EqualsAndHashCode(callSuper=true)
-@Builder
+@EqualsAndHashCode(callSuper=false)
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Pedido extends Auditoria {

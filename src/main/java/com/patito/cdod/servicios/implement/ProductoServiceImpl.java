@@ -28,6 +28,12 @@ public class ProductoServiceImpl implements ProductoService {
     private VendedorService vendedorService;
 
     @Override
+    public Producto obtenerProductoPorHawa(String hawa) {
+        return productoRepository.findByHawa(hawa)
+                .orElseThrow(() -> new ResourceNotFoundException("Producto", "HAWA", hawa));
+    }
+
+    @Override
     public CustomResponseEntity<List<ProductoPayload>> getAllProducts() {
         List<Producto> productos = productoRepository.findAll();
         List<ProductoPayload> productoPayloads = productos.stream()
@@ -57,8 +63,7 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     public CustomResponseEntity<ProductoDetallePayload> getProductoDetalle(String hawa) {
-        Producto producto = productoRepository.findByHawa(hawa)
-                .orElseThrow(() -> new ResourceNotFoundException("Producto", "HAWA", hawa));
+        Producto producto = obtenerProductoPorHawa(hawa);
         return CustomResponseEntity.success200(convertirAProductoPayloadDetalle(producto), "Producto encontrado");
     }
 
@@ -71,7 +76,8 @@ public class ProductoServiceImpl implements ProductoService {
         return CustomResponseEntity.success200(productoPayloads, "Productos encontrados");
     }
 
-    private ProductoPayload convertirAProductoPayload(Producto producto) {
+    @Override
+    public ProductoPayload convertirAProductoPayload(Producto producto) {
         return ProductoPayload.builder()
                 .hawa(producto.getHawa())
                 .nombre(producto.getNombre())

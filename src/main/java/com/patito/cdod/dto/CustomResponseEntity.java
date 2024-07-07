@@ -19,7 +19,7 @@ public class CustomResponseEntity<T> extends ResponseEntity<CustomResponseEntity
         private String message;
     }
 
-    public static <T> CustomResponseEntity<T> success(T data, String message, HttpStatus status) {
+    public static <T> CustomResponseEntity<T> customStatus(T data, String message, HttpStatus status) {
         return new CustomResponseEntity<>(true, data, message, status);
     }
 

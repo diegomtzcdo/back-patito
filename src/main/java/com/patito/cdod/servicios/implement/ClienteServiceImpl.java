@@ -18,6 +18,12 @@ public class ClienteServiceImpl implements ClienteService {
     private ClienteRepository clienteRepository;
 
     @Override
+    public Cliente obtenerClientePorEmail(String email) {
+        return clienteRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente", "email", email));
+    }
+
+    @Override
     public CustomResponseEntity<Cliente> create(ClientePayload cliente) {
         if(clienteRepository.existsByEmail(cliente.getEmail())) {
             throw new BadRequestException("Correo ya registrado, ingresa con otro");
@@ -39,7 +45,7 @@ public class ClienteServiceImpl implements ClienteService {
         updateCliente.setPassword(cliente.getPassword());
         updateCliente.setDireccion(cliente.getDireccion());
         updateCliente.setTelefono(cliente.getTelefono());
-        return CustomResponseEntity.success(clienteRepository.save(updateCliente), "Cliente creado", HttpStatus.CREATED);
+        return CustomResponseEntity.customStatus(clienteRepository.save(updateCliente), "Cliente creado", HttpStatus.CREATED);
     }
 
     @Override
