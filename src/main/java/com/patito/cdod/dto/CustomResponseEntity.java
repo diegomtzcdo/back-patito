@@ -27,7 +27,7 @@ public class CustomResponseEntity<T> extends ResponseEntity<CustomResponseEntity
         return new CustomResponseEntity<>(true, data, message, HttpStatus.OK);
     }
 
-    public static <T> CustomResponseEntity<T> failure(String message, HttpStatus status) {
+    public static <T> CustomResponseEntity<T> failure(T data, String message, HttpStatus status) {
         return new CustomResponseEntity<>(false, null, message, status);
     }
 }

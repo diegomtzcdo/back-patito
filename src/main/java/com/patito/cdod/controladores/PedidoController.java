@@ -1,8 +1,6 @@
 package com.patito.cdod.controladores;
 
 import com.patito.cdod.dto.*;
-import com.patito.cdod.entities.Pedido;
-import com.patito.cdod.entities.extra.EstatusPedido;
 import com.patito.cdod.servicios.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;

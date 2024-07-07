@@ -9,15 +9,15 @@ import java.util.List;
 
 public interface ProductoService {
 
-    public Producto obtenerProductoPorHawa(String hawa);
+    Producto obtenerProductoPorHawa(String hawa);
 
-    public CustomResponseEntity<List<ProductoPayload>> getAllProducts();
+    CustomResponseEntity<List<ProductoPayload>> getAllProducts();
 
-    public CustomResponseEntity<ProductoPayload> crearProducto(ProductoDetallePayload productoPayload);
+    CustomResponseEntity<ProductoPayload> crearProducto(ProductoDetallePayload productoPayload);
 
-    public CustomResponseEntity<ProductoDetallePayload> getProductoDetalle(String HAWA);
+    CustomResponseEntity<ProductoDetallePayload> getProductoDetalle(String HAWA);
 
-    public CustomResponseEntity<List<ProductoDetallePayload>> getListProductoDetalle(List<String> listHAWA);
+    CustomResponseEntity<List<ProductoDetallePayload>> getListProductoDetalle(List<String> listHAWA);
 
-    public ProductoPayload convertirAProductoPayload(Producto producto);
+    ProductoPayload convertirAProductoPayload(Producto producto);
 }

@@ -43,7 +43,6 @@ public class PedidoServiceImpl implements PedidoService {
                 .ipUsuario(request.getRemoteAddr())
                 .accion("Creacion Pedido")
                 .build();
-        new PedidoProductoPayload().getHawa();
         List<PedidoProducto> pedidoProductos = pedido.getProductos().stream()
                 .map(pp -> {
                     Producto producto = productoService.obtenerProductoPorHawa(pp.getHawa());
