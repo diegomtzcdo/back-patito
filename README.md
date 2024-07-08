@@ -44,9 +44,10 @@ La aplicación utiliza Spring Security para autenticación y autorización.
 
 ## Endpoints de la API
 
-- **/orders**: Endpoint para crear y listar pedidos.
-- **/orders/{id}**: Endpoint para recuperar, actualizar y eliminar un pedido específico.
-- **/inventory**: Endpoint para verificar el inventario de productos.
+Purede consultarse la coleccion de POSTMAN Adjunta
+
+## Requerimientos y Tareas
+[Notion - Patito Industry | Requerimientos | Tareas](https://quill-moose-612.notion.site/9b49d3b431d84fcd87122acf1bb0f92f?v=568603fd790a448fa0a9bfdbc27b43e2)
 
 ## Contacto
 
