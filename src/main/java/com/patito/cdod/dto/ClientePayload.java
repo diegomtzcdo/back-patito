@@ -1,5 +1,6 @@
 package com.patito.cdod.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +17,7 @@ import javax.validation.constraints.NotBlank;
 public class ClientePayload {
     @Email(message = "*Porfavor ingresa un correo Valido")
     @NotEmpty(message = "*Porfavor ingresa un correo")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String email;
     @NotBlank
     @NotEmpty(message = "*Porfavor ingresa una contraseña")

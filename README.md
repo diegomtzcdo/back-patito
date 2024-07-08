@@ -4,6 +4,9 @@
 [![Coverage Status](https://coveralls.io/repos/github/diegomtzcdo/back-patito/badge.svg?branch=master)](https://coveralls.io/github/diegomtzcdo/back-patito?branch=master)
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
+![Java](https://img.shields.io/badge/Java-11-orange)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.5.7.RELEASE-brightgreen)
+
 Un sistema integral para validar el inventario de las camionetas antes de realizar pedidos para las tiendas Patito.
 
 ## Requisitos

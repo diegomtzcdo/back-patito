@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pedido")
+@CrossOrigin(allowCredentials = "true", origins="http://localhost:5173")
 public class PedidoController {
 
     @Autowired

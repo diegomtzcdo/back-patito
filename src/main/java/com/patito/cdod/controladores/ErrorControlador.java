@@ -10,11 +10,13 @@ import com.patito.cdod.excepciones.OperacionNoPermitidaExcepcion;
 import com.patito.cdod.excepciones.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
+@CrossOrigin(allowCredentials = "true", origins="http://localhost:5173")
 public class ErrorControlador extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({RuntimeException.class, AppException.class})

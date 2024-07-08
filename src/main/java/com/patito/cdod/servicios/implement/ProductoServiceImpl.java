@@ -6,7 +6,9 @@ import com.patito.cdod.dto.ProductoPayload;
 import com.patito.cdod.dto.TiendaPayload;
 import com.patito.cdod.entities.Producto;
 import com.patito.cdod.entities.Vendedor;
+import com.patito.cdod.entities.extra.EstatusPedido;
 import com.patito.cdod.excepciones.ResourceNotFoundException;
+import com.patito.cdod.repositorios.PedidoProductoRepository;
 import com.patito.cdod.repositorios.ProductoRepository;
 import com.patito.cdod.servicios.ProductoService;
 import com.patito.cdod.servicios.VendedorService;
@@ -15,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +30,9 @@ public class ProductoServiceImpl implements ProductoService {
     @Autowired
     private VendedorService vendedorService;
 
+    @Autowired
+    private PedidoProductoRepository pedidoProductoRepository;
+
     @Override
     public Producto obtenerProductoPorHawa(String hawa) {
         return productoRepository.findByHawa(hawa)
@@ -36,9 +42,15 @@ public class ProductoServiceImpl implements ProductoService {
     @Override
     public CustomResponseEntity<List<ProductoPayload>> getAllProducts() {
         List<Producto> productos = productoRepository.findAll();
-        List<ProductoPayload> productoPayloads = productos.stream()
-                .map(this::convertirAProductoPayload)
-                .collect(Collectors.toList());
+        List<ProductoPayload> productoPayloads = new ArrayList<>();
+
+        for (Producto producto : productos) {
+            int existenciasActuales = producto.getExistencias();
+            Integer cantidadEnPedidosPendientes = pedidoProductoRepository.sumCantidadByProductoIdAndPedidoEstatus(producto.getId(), EstatusPedido.PENDIENTE);
+            if(cantidadEnPedidosPendientes == null) cantidadEnPedidosPendientes = 0;
+            int existenciasDisponibles = existenciasActuales - cantidadEnPedidosPendientes;
+            productoPayloads.add(convertirAProductoPayloadDiffExistencias(producto, existenciasDisponibles));
+        }
         return CustomResponseEntity.success200(productoPayloads, "Lista de productos obtenida exitosamente");
     }
 
@@ -83,6 +95,16 @@ public class ProductoServiceImpl implements ProductoService {
                 .nombre(producto.getNombre())
                 .precio(producto.getPrecio())
                 .existencias(producto.getExistencias())
+                .porcentajeDescuento(producto.getPorcentajeDescuento())
+                .build();
+    }
+
+    private ProductoPayload convertirAProductoPayloadDiffExistencias(Producto producto, int existencias) {
+        return ProductoPayload.builder()
+                .hawa(producto.getHawa())
+                .nombre(producto.getNombre())
+                .precio(producto.getPrecio())
+                .existencias(existencias)
                 .porcentajeDescuento(producto.getPorcentajeDescuento())
                 .build();
     }

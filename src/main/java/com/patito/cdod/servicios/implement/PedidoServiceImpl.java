@@ -7,6 +7,7 @@ import com.patito.cdod.entities.PedidoProducto;
 import com.patito.cdod.entities.Producto;
 import com.patito.cdod.excepciones.BadRequestException;
 import com.patito.cdod.excepciones.ResourceNotFoundException;
+import com.patito.cdod.repositorios.PedidoProductoRepository;
 import com.patito.cdod.servicios.PedidoService;
 import com.patito.cdod.entities.extra.EstatusPedido;
 import com.patito.cdod.repositorios.PedidoRepository;
@@ -34,6 +35,9 @@ public class PedidoServiceImpl implements PedidoService {
     @Autowired
     private ProductoService productoService;
 
+    @Autowired
+    private PedidoProductoRepository pedidoProductoRepository;
+
     @Override
     public CustomResponseEntity<PedidoDTO> createPedido(PedidoPayload pedido, HttpServletRequest request, String email) {
         Cliente cliente = clienteService.obtenerClientePorEmail(email);
@@ -46,6 +50,13 @@ public class PedidoServiceImpl implements PedidoService {
         List<PedidoProducto> pedidoProductos = pedido.getProductos().stream()
                 .map(pp -> {
                     Producto producto = productoService.obtenerProductoPorHawa(pp.getHawa());
+                    int existenciasActuales = producto.getExistencias();
+                    Integer cantidadEnPedidosPendientes = pedidoProductoRepository.sumCantidadByProductoIdAndPedidoEstatus(producto.getId(), EstatusPedido.PENDIENTE);
+                    if(cantidadEnPedidosPendientes == null) cantidadEnPedidosPendientes = 0;
+                    int existenciasDisponibles = existenciasActuales - cantidadEnPedidosPendientes;
+                    if(existenciasDisponibles < pp.getCantidad()) {
+                        throw new BadRequestException("Insuficiencia de " + pp.getHawa() + " solo hay " + existenciasDisponibles + " disponibles");
+                    }
                     return PedidoProducto.builder()
                             .pedido(newPedido)
                             .producto(producto)
